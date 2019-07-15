@@ -20,6 +20,9 @@ $api->version('v1', function ($api) use ($basePath, $webhooksPath) {
         return 'PUBLIC_ROUTE';
     });
 
+    // Questions Index
+    $api->get('questions', $basePath . 'QuestionController@indexQuestions');
+
     // Webhooks
     $api->group(['prefix' => 'webhooks'], function ($api) use ($webhooksPath) {
         // AWS
