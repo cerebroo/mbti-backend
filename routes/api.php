@@ -23,6 +23,9 @@ $api->version('v1', function ($api) use ($basePath, $webhooksPath) {
     // Questions Index
     $api->get('questions', $basePath . 'QuestionController@indexQuestions');
 
+    // Submissions
+    $api->post('submit', $basePath . 'SubmissionController@submit');
+
     // Webhooks
     $api->group(['prefix' => 'webhooks'], function ($api) use ($webhooksPath) {
         // AWS

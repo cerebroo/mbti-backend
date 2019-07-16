@@ -15,6 +15,20 @@ class ValidationServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
+        Validator::extend('submission_responses', function ($attribute, $value, $parameters, $validator) {
+            $questionIds = array_keys($value);
+
+            $validator = Validator::make($questionIds, [
+                '*' => 'numeric'
+            ]);
+
+            if ($validator->fails()) {
+                return false;
+            }
+
+            return true;
+        });
+
         Validator::extend('latitude', function ($attribute, $value) {
             return preg_match(RegexService::REGEX_LATITUDE, $value);
         });

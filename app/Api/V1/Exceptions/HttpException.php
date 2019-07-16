@@ -15,4 +15,6 @@ class ApiErrorCode {
     // All Auth Related Error Follows here
     const AUTH_GENERIC            = 100;
     const AUTH_INVALID_CREDENTIAL = 101;
+
+    const SUBMISSION_INVALID_QUESTION = 201;
 }
