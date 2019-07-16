@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Observers\SubmissionObserver;
+use App\Submission;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
@@ -20,6 +22,7 @@ class AppServiceProvider extends ServiceProvider {
      * @return void
      */
     public function boot() {
-        //
+        // Observing the Submission create events to send emails...
+        Submission::observe(SubmissionObserver::class);
     }
 }
