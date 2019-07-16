@@ -25,6 +25,7 @@ $api->version('v1', function ($api) use ($basePath, $webhooksPath) {
 
     // Submissions
     $api->post('submit', $basePath . 'SubmissionController@submit');
+    $api->get('submissions/{submissionId}', $basePath . 'SubmissionController@showSubmission');
 
     // Webhooks
     $api->group(['prefix' => 'webhooks'], function ($api) use ($webhooksPath) {

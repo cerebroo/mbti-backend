@@ -17,4 +17,5 @@ class ApiErrorCode {
     const AUTH_INVALID_CREDENTIAL = 101;
 
     const SUBMISSION_INVALID_QUESTION = 201;
+    const SUBMISSION_NOT_FOUND        = 202;
 }

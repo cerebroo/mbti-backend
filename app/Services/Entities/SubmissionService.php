@@ -11,6 +11,10 @@ use App\Services\HelperService;
 use App\Submission;
 
 class SubmissionService {
+    public function showByToken($submissionToken) {
+        return Submission::whereToken($submissionToken)->first();
+    }
+
     public function submit(SubmissionCreateContract $contract) {
         $questionService = App::make(QuestionService::class);
 
