@@ -6,13 +6,28 @@ namespace App\Services\Entities;
 
 use App;
 use App\Api\V1\Exceptions\Submission\SubmissionInvalidQuestionException;
+use App\Services\CacheService;
 use App\Services\Contracts\SubmissionCreateContract;
 use App\Services\HelperService;
 use App\Submission;
 
 class SubmissionService {
     public function showByToken($submissionToken) {
-        return Submission::whereToken($submissionToken)->first();
+        $cacheService = App::make(CacheService::class);
+
+        $_cacheKey = $this->_getSubmissionCacheKey($submissionToken);
+
+        if ($cacheService->hasCache($_cacheKey)) {
+            // Cache Exists
+            return unserialize($cacheService->getCache($_cacheKey));
+        }
+
+        $submission = Submission::whereToken($submissionToken)->first();
+
+        // Setting into cache for next retrieval
+        $cacheService->setCache($_cacheKey, serialize($submission));
+
+        return $submission;
     }
 
     public function submit(SubmissionCreateContract $contract) {
@@ -36,5 +51,9 @@ class SubmissionService {
         $submission->save();
 
         return $submission;
+    }
+
+    private function _getSubmissionCacheKey($submissionToken) {
+        return "submissions_" . $submissionToken;
     }
 }
