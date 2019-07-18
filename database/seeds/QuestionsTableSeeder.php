@@ -97,7 +97,7 @@ class QuestionsTableSeeder extends Seeder {
 
         Question::create([
             'question'   => 'Keeping your options open is more important than having a to-do list.',
-            'dimension'  => Question::DIMENSION_TF,
+            'dimension'  => Question::DIMENSION_JP,
             'direction'  => 1,
             'sort_order' => 100
         ]);
